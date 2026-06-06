@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ClassAtent</title>
+    
+    <!-- NUEVO: Conexión para que sea instalable en teléfonos -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#FFFFFF">
+
     <style>
         /* 1. Limpiamos márgenes para que ocupe todo el teléfono sin bordes */
         body, html {
@@ -52,5 +57,15 @@
         <div class="bloque-tapa-logo"></div>
     </div>
 
+    <!-- NUEVO: Activador del Service Worker para habilitar la instalación -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('Service Worker registrado con éxito', reg))
+            .catch(err => console.log('Error al registrar el Service Worker', err));
+        });
+      }
+    </script>
 </body>
 </html>
